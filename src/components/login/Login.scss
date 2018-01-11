@@ -1,0 +1,20 @@
+.login-component {
+  .login-wrapper {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .login-inner {
+      width: 400px;
+      height: 200px;
+      background: white;
+      border: 1px solid #d0d0d0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+

@@ -1,0 +1,79 @@
+.app-component {
+  height: 100vh;
+  padding-top: 100px;
+
+  #header {
+    width: 100vw;
+    height: 80px;
+    background-color: #070744;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .header-content {
+      display: flex;
+      width: 75%;
+      justify-content: space-between;
+      align-items: center;
+
+      .header-login-button {
+        color: white;
+        background-color: #ff8f00;
+        height: 40px;
+        padding: 8px 32px;
+        font-size: 17px;
+        border: none;
+      }
+
+      .header-title {
+        font-family: sans-serif;
+        color: white;
+        font-size: 40px;
+      }
+    }
+  }
+
+
+  .component-content-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .inner {
+      width: 75%;
+      background: white;
+      border: 1px solid #d0d0d0;
+      display: flex;
+
+      .separator-wrapper {
+        height: 100%;
+        width: 1px;
+        display: flex;
+        align-items: center;
+
+        .separator {
+          height: 90%;
+          width: 1px;
+          background-color: #d0d0d0;
+          margin-top: 5%;
+        }
+      }
+
+      .categories-wrapper {
+        width: 220px;
+        padding: 16px;
+      }
+
+      .items-wrapper {
+        padding: 16px;
+      }
+    }
+  }
+
+  .big-title {
+    color: #070744
+  }
+}

@@ -1,0 +1,14 @@
+.edit-item-component {
+  .delete-item-wrapper {
+    padding: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .delete-button {
+    margin-top: 32px;
+  }
+}
