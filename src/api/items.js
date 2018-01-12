@@ -2,7 +2,7 @@ import {API_END_POINT} from '../config';
 import {processResponse} from '../helpers/response';
 
 export const getLatestItems = async () => {
-    const res = await fetch(API_END_POINT + "/latest-items");
+    const res = await fetch(API_END_POINT + "/items/latest");
     return processResponse(res);
 };
 
