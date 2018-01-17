@@ -6,15 +6,13 @@ import {
     DELETE_ITEM_COMPLETE, DELETE_ITEM_ERROR, DELETE_ITEM_REQUEST
 } from './types';
 import * as itemsAPI from '../api/items';
-import {errorHandler} from '../helpers/error';
-import {getAccessToken} from '../reducers';
 
-export const requestLatestItems = async () => async (dispatch) => {
-    dispatch({
-        type: GET_LATEST_ITEMS_REQUEST
-    });
+export const requestLatestItems = async () => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: GET_LATEST_ITEMS_REQUEST
+        });
 
-    try {
         const items = await itemsAPI.getLatestItems();
 
         dispatch({
@@ -23,18 +21,18 @@ export const requestLatestItems = async () => async (dispatch) => {
         });
 
         return items;
-    } catch (error) {
-        errorHandler(error, GET_LATEST_ITEMS_ERROR, dispatch)
-    }
-};
+    },
 
-export const requestItemDetails = async (id) => async (dispatch) => {
-    dispatch({
-        type: GET_ITEM_DETAILS_REQUEST,
-        id
-    });
+    errorType: GET_LATEST_ITEMS_ERROR
+});
 
-    try {
+export const requestItemDetails = async (id) => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: GET_ITEM_DETAILS_REQUEST,
+            id
+        });
+
         const item = await itemsAPI.getItemDetails(id);
 
         dispatch({
@@ -43,23 +41,22 @@ export const requestItemDetails = async (id) => async (dispatch) => {
         });
 
         return item;
-    } catch (error) {
-        errorHandler(error, GET_ITEM_DETAILS_ERROR, dispatch)
-    }
-};
+    },
 
-export const updateItem = async (id, name, description, categoryId) => async (dispatch, getState) => {
-    dispatch({
-        type: UPDATE_ITEM_REQUEST,
-        id,
-        name,
-        description,
-        categoryId
-    });
+    errorType: GET_ITEM_DETAILS_ERROR
+});
 
-    try {
-        const accessToken = getAccessToken(getState());
-        const updated = await itemsAPI.updateItem(accessToken, id, name, description, categoryId);
+export const updateItem = async (id, name, description, categoryId) => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: UPDATE_ITEM_REQUEST,
+            id,
+            name,
+            description,
+            categoryId
+        });
+
+        const updated = await itemsAPI.updateItem(id, name, description, categoryId);
 
         dispatch({
             type: UPDATE_ITEM_COMPLETE,
@@ -67,22 +64,21 @@ export const updateItem = async (id, name, description, categoryId) => async (di
         });
 
         return updated;
-    } catch (error) {
-        errorHandler(error, UPDATE_ITEM_ERROR, dispatch);
-    }
-};
+    },
 
-export const addItem = async (name, description, categoryId) => async (dispatch, getState) => {
-    dispatch({
-        type: ADD_ITEM_REQUEST,
-        name,
-        description,
-        categoryId
-    });
+    errorType: UPDATE_ITEM_ERROR
+});
 
-    try {
-        const accessToken = getAccessToken(getState());
-        const added = await itemsAPI.addItem(accessToken, name, description, categoryId);
+export const addItem = async (name, description, categoryId) => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: ADD_ITEM_REQUEST,
+            name,
+            description,
+            categoryId
+        });
+
+        const added = await itemsAPI.addItem(name, description, categoryId);
 
         dispatch({
             type: ADD_ITEM_COMPLETE,
@@ -90,20 +86,19 @@ export const addItem = async (name, description, categoryId) => async (dispatch,
         });
 
         return added;
-    } catch (error) {
-        errorHandler(error, ADD_ITEM_ERROR, dispatch);
-    }
-};
+    },
 
-export const deleteItem = async (id) => async (dispatch, getState) => {
-    dispatch({
-        type: DELETE_ITEM_REQUEST,
-        id
-    });
+    errorType: ADD_ITEM_ERROR
+});
 
-    try {
-        const accessToken = getAccessToken(getState());
-        await itemsAPI.deleteItem(accessToken, id);
+export const deleteItem = async (id) => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: DELETE_ITEM_REQUEST,
+            id
+        });
+
+        await itemsAPI.deleteItem(id);
 
         dispatch({
             type: DELETE_ITEM_COMPLETE,
@@ -111,7 +106,7 @@ export const deleteItem = async (id) => async (dispatch, getState) => {
         });
 
         return true;
-    } catch (error) {
-        errorHandler(error, DELETE_ITEM_ERROR, dispatch);
-    }
-};
+    },
+
+    errorType: DELETE_ITEM_ERROR
+});

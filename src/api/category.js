@@ -1,12 +1,13 @@
-import {API_END_POINT} from '../config';
-import {processResponse} from '../helpers/response';
+import {request} from '../helpers/api';
 
 export const getAllCategories = async () => {
-    const res = await fetch(API_END_POINT + "/categories");
-    return processResponse(res);
+    return request({
+        url: '/categories'
+    });
 };
 
 export const getCategoryDetails = async (slug) => {
-    const res = await fetch(API_END_POINT + "/categories/" + slug);
-    return processResponse(res);
+    return request({
+        url: '/categories/' + slug
+    });
 };

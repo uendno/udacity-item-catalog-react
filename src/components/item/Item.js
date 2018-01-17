@@ -4,7 +4,7 @@ import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {requestItemDetails} from '../../actions/items';
-import {getItemById, getSessionInfo} from '../../reducers';
+import {getItemById, getSessionInfo} from '../../selectors';
 import './Item.css';
 
 
@@ -34,7 +34,7 @@ class Item extends Component {
                             <div className="single-item-wrapper">
                                 <h1 className="big-title">{item.name} </h1>
                                 <p> {item.description}</p>
-                                {this._renderActionButtonsIfNeeded()}
+                                {this.renderActionButtonsIfNeeded()}
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ class Item extends Component {
         }
     }
 
-    _renderActionButtonsIfNeeded() {
+    renderActionButtonsIfNeeded() {
         const {sessionInfo, item} = this.props;
 
         if (!sessionInfo) {

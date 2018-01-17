@@ -1,16 +1,11 @@
-import {API_END_POINT} from '../config';
-import {processResponse} from '../helpers/response';
+import {request} from '../helpers/api';
 
 export const gConnect = async (code) => {
-
-    const res = await fetch(API_END_POINT + "/gconnect", {
+    return request({
+        url: '/auth?provider=google',
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+        data: {
             code
-        })
-    });
-    return processResponse(res);
+        }
+    })
 };

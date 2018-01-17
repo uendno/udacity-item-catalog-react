@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-
-import {getAccessToken} from '../reducers';
-import {logout} from '../actions/auth';
-
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
+import localStorageSrv from '../services/localStorage';
 import './App.css';
 import AlertComponent from './modals/alert/Alert';
 import NotFoundComponent from './not-found/NotFound';
@@ -18,12 +13,12 @@ import CatalogComponent from './catalog/Catalog';
 import ItemComponent from './item/Item';
 import LoginComponent from './login/Login';
 import LoginButtonComponent from './login-button/LoginButton';
-import EditItemComponent from './edit-item/EditItem';
-import DeleteItemComponent from './delete-item/DeleteItem';
+import EditItemComponent from './item/edit-item/EditItem';
+import DeleteItemComponent from './item/delete-item/DeleteItem';
 
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={props => {
-        const accessToken = localStorage.getItem('accessToken');
+        const accessToken = localStorageSrv.get('accessToken');
 
         return (
             accessToken ? (

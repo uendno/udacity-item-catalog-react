@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {requestItemDetails, updateItem, addItem} from '../../actions/items';
-import {requestAllCategories} from '../../actions/category';
-import {getItemById, getSessionInfo, getAllCategories} from '../../reducers/index';
+import {requestItemDetails, updateItem, addItem} from '../../../actions/items';
+import {requestAllCategories} from '../../../actions/category';
+import {getItemById, getSessionInfo, getAllCategories} from '../../../selectors';
 import './EditItem.css';
 
 
@@ -74,11 +73,11 @@ class Item extends Component {
 
                             Category
                             <br/>
-                            {this._renderCategorySelect()}
+                            {this.renderCategorySelect()}
 
                             <br/>
                             <br/>
-                            <button onClick={this._handleSubmit.bind(this)}>Submit</button>
+                            <button onClick={this.handleSubmit.bind(this)}>Submit</button>
                         </div>
                     </div>
                 </div>
@@ -88,7 +87,7 @@ class Item extends Component {
 
     }
 
-    _renderCategorySelect() {
+    renderCategorySelect() {
         const {categories} = this.props;
         const {categoryId} = this.state;
 
@@ -112,7 +111,7 @@ class Item extends Component {
         )
     }
 
-    async _handleSubmit() {
+    async handleSubmit() {
         const {history, updateItem, addItem} = this.props;
         const {id, name, description, categoryId} = this.state;
 

@@ -21,8 +21,8 @@ class Login extends Component {
                             clientId={GOOGLE_CLIENT_ID}
                             buttonText="Login"
                             responseType='code'
-                            onSuccess={this._onSuccess.bind(this)}
-                            onFailure={this._onFailure.bind(this)}
+                            onSuccess={this.onSuccess.bind(this)}
+                            onFailure={this.onFailure.bind(this)}
                         />
                         <p id="wait" hidden>Please wait...</p>
                     </div>
@@ -31,13 +31,13 @@ class Login extends Component {
         )
     }
 
-    async _onSuccess(res) {
+    async onSuccess(res) {
         const {gConnect, history} = this.props;
         await gConnect(res.code);
         history.replace('/');
     }
 
-    _onFailure(error) {
+    onFailure(error) {
         console.log(error);
     }
 }

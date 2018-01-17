@@ -3,35 +3,35 @@ import {
     GET_CATEGORY_DETAILS_COMPLETE, GET_CATEGORY_DETAILS_ERROR, GET_CATEGORY_DETAILS_REQUEST
 } from './types';
 import * as categoryAPI from '../api/category';
-import {errorHandler} from "../helpers/error";
 
-export const requestAllCategories = async () => async (dispatch) => {
-    dispatch({
-        type: GET_CATEGORIES_REQUEST
-    });
+export const requestAllCategories = async () => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: GET_CATEGORIES_REQUEST
+        });
 
-    try {
-        const categories = await categoryAPI.getAllCategories();
+        // try {
+        const categories = await
+            categoryAPI.getAllCategories();
 
         dispatch({
             type: GET_CATEGORIES_COMPLETE,
-            categories
+            categories: categories
         });
 
         return categories
-    } catch (error) {
-        console.error(error);
-        errorHandler(error, GET_CATEGORIES_ERROR, dispatch);
-    }
-};
+    },
 
-export const requestCategoryDetails = async (categorySlug) => async (dispatch) => {
-    dispatch({
-        type: GET_CATEGORY_DETAILS_REQUEST,
-        categorySlug
-    });
+    errorType: GET_CATEGORIES_ERROR
+});
 
-    try {
+export const requestCategoryDetails = async (categorySlug) => ({
+    func: async (dispatch) => {
+        dispatch({
+            type: GET_CATEGORY_DETAILS_REQUEST,
+            categorySlug
+        });
+
         const category = await categoryAPI.getCategoryDetails(categorySlug);
 
         dispatch({
@@ -40,8 +40,7 @@ export const requestCategoryDetails = async (categorySlug) => async (dispatch) =
         });
 
         return category;
-    } catch (error) {
-        console.error(error);
-        errorHandler(error, GET_CATEGORY_DETAILS_ERROR, dispatch);
-    }
-};
+    },
+
+    errorType: GET_CATEGORY_DETAILS_ERROR
+});

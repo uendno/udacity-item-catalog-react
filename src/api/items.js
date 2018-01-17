@@ -1,56 +1,45 @@
-import {API_END_POINT} from '../config';
-import {processResponse} from '../helpers/response';
+import {request, requestAuth} from '../helpers/api';
 
 export const getLatestItems = async () => {
-    const res = await fetch(API_END_POINT + "/items/latest");
-    return processResponse(res);
+    return request({
+        url: '/items?mode=latest&limit=10'
+    });
 };
 
 export const getItemDetails = async (id) => {
-    const res = await fetch(API_END_POINT + '/items/' + id);
-    return processResponse(res);
+    return request({
+        url: '/items/' + id
+    });
 };
 
-export const updateItem = async (accessToken, id, name, description, categoryId) => {
-    const res = await fetch(API_END_POINT + "/items/" + id, {
+export const updateItem = async (id, name, description, categoryId) => {
+    return requestAuth({
+        url: '/items/' + id,
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': accessToken
-        },
-        body: JSON.stringify({
+        data: {
             id,
             name,
             description,
             categoryId
-        })
+        }
     });
-    return processResponse(res);
 };
 
-export const addItem = async (accessToken, name, description, categoryId) => {
-    const res = await fetch(API_END_POINT + "/items", {
+export const addItem = async (name, description, categoryId) => {
+    return requestAuth({
+        url: '/items',
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': accessToken
-        },
-        body: JSON.stringify({
+        data: {
             name,
             description,
             categoryId
-        })
+        }
     });
-    return processResponse(res);
 };
 
-export const deleteItem = async (accessToken, id) => {
-    const res = await fetch(API_END_POINT + "/items/" + id, {
+export const deleteItem = async (id) => {
+    return requestAuth({
+        url: '/items/' + id,
         method: 'DELETE',
-        headers: {
-            'Authorization': accessToken
-        },
     });
-
-    return processResponse(res);
 };

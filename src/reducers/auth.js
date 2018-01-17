@@ -1,23 +1,23 @@
 import jwt from 'jsonwebtoken';
 import {G_CONNECT_COMPLETE, LOG_OUT} from '../actions/types'
+import localStorageSrv from '../services/localStorage';
 
-const persisted = localStorage.getItem('accessToken');
+const persistedAccessToken = localStorageSrv.get('accessToken');
 
 const initialState = {
-    accessToken: persisted !== '' && persisted,
+    accessToken: persistedAccessToken !== '' && persistedAccessToken,
 };
 
 if (initialState.accessToken) {
     initialState.decoded = jwt.decode(initialState.accessToken);
 }
 
-
 const auth = (state = initialState, action) => {
     switch (action.type) {
         case G_CONNECT_COMPLETE: {
             const decoded = jwt.decode(action.accessToken);
 
-            localStorage.setItem('accessToken', action.accessToken);
+            localStorageSrv.set('accessToken', action.accessToken);
 
             return {
                 accessToken: action.accessToken,
@@ -26,7 +26,7 @@ const auth = (state = initialState, action) => {
         }
 
         case LOG_OUT: {
-            localStorage.removeItem('accessToken');
+            localStorageSrv.remove('accessToken');
 
             return {};
         }
@@ -38,6 +38,3 @@ const auth = (state = initialState, action) => {
 
 export default auth;
 
-export const getAccessToken = (state) => state.accessToken;
-
-export const getSessionInfo = (state) => state.decoded;

@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {requestAllCategories, requestCategoryDetails} from '../../actions/category';
 import {requestLatestItems} from '../../actions/items';
-import {getAllCategories, getLatestItems, getItemsForCategory, getAccessToken} from '../../reducers';
+import {getAllCategories, getLatestItems, getItemsForCategory, getAccessToken} from '../../selectors';
 import './Catalog.css';
 
 class CatalogComponent extends Component {
@@ -54,7 +54,7 @@ class CatalogComponent extends Component {
                     <div className='inner'>
                         <div className='categories-wrapper'>
                             <h2 className="big-title">Categories</h2>
-                            {this._renderCategories()}
+                            {this.renderCategories()}
                         </div>
 
                         <div className="separator-wrapper">
@@ -62,9 +62,9 @@ class CatalogComponent extends Component {
                         </div>
 
                         <div className='items-wrapper'>
-                            {this._renderAddButtonIfNeeded()}
-                            {this._renderTitle()}
-                            {this._renderItems()}
+                            {this.renderAddButtonIfNeeded()}
+                            {this.renderTitle()}
+                            {this.renderItems()}
                         </div>
                     </div>
                 </div>
@@ -72,10 +72,10 @@ class CatalogComponent extends Component {
         )
     }
 
-    _renderAddButtonIfNeeded() {
-        const {isIndex, accessToken} = this.props;
+    renderAddButtonIfNeeded() {
+        const {accessToken} = this.props;
 
-        if (isIndex && accessToken) {
+        if (accessToken) {
             return (
                 <Link to="/add">Add Item</Link>
             )
@@ -84,7 +84,7 @@ class CatalogComponent extends Component {
         }
     }
 
-    _renderTitle() {
+    renderTitle() {
         const {isIndex, categories, categorySlug} = this.props;
 
 
@@ -103,7 +103,7 @@ class CatalogComponent extends Component {
         return (<h2 className="big-title">{title}</h2>)
     }
 
-    _renderCategories() {
+    renderCategories() {
         const {categories} = this.props;
 
         return categories.map(category => (
@@ -117,7 +117,7 @@ class CatalogComponent extends Component {
         ))
     }
 
-    _renderItems() {
+    renderItems() {
         const {isIndex, items} = this.props;
 
         return items.map(item => {

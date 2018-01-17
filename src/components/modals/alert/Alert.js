@@ -8,7 +8,7 @@ class AlertComponent extends React.Component {
         super(props);
     }
 
-    _handleClose() {
+    handleClose() {
         Alert.close(this.props.id);
     }
 
@@ -18,7 +18,7 @@ class AlertComponent extends React.Component {
 
         return (
             <div className={this.props.classNames} id={this.props.id} style={this.props.styles}>
-                <BSAlert className="bs-alert" bsStyle="danger" onDismiss={this._handleClose.bind(this)}>
+                <BSAlert className="bs-alert" bsStyle="danger" onDismiss={this.handleClose.bind(this)}>
                     <strong>{customFields.title}</strong> {message}
                 </BSAlert>
             </div>
