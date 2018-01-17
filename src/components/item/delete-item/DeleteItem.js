@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import PropTypes from 'prop-types';
-import './DeleteItem.css';
+import './DeleteItem.scss';
 import {deleteItem} from '../../../actions/items';
 
 
@@ -36,7 +36,7 @@ class DeleteItem extends Component {
         const {deleteItem, match, history} = this.props;
         const itemId = match.params.itemId;
 
-        const result = await deleteItem(parseInt(itemId));
+        const result = await deleteItem(parseInt(itemId, 10));
 
         if (result) {
             history.push('/')

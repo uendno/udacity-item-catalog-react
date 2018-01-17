@@ -4,7 +4,7 @@ import GoogleLogin from 'react-google-login';
 import PropTypes from 'prop-types';
 import {GOOGLE_CLIENT_ID} from '../../config';
 import {gConnect} from '../../actions/auth';
-import './Login.css';
+import './Login.scss';
 
 class Login extends Component {
     static propTypes = {

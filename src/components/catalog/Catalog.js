@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {requestAllCategories, requestCategoryDetails} from '../../actions/category';
 import {requestLatestItems} from '../../actions/items';
 import {getAllCategories, getLatestItems, getItemsForCategory, getAccessToken} from '../../selectors';
-import './Catalog.css';
+import './Catalog.scss';
 
 class CatalogComponent extends Component {
 

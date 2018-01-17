@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {requestItemDetails, updateItem, addItem} from '../../../actions/items';
 import {requestAllCategories} from '../../../actions/category';
 import {getItemById, getSessionInfo, getAllCategories} from '../../../selectors';
-import './EditItem.css';
+import './EditItem.scss';
 
 
 class Item extends Component {
@@ -43,7 +43,6 @@ class Item extends Component {
     }
 
     render() {
-        const {item} = this.props;
         const {name, description} = this.state;
 
 

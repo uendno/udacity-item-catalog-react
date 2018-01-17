@@ -6,7 +6,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
 import localStorageSrv from '../services/localStorage';
-import './App.css';
+import './App.scss';
 import AlertComponent from './modals/alert/Alert';
 import NotFoundComponent from './not-found/NotFound';
 import CatalogComponent from './catalog/Catalog';

@@ -1,13 +1,9 @@
 import React from 'react';
 import Alert from 'react-s-alert';
 import {Alert as BSAlert} from 'react-bootstrap';
-import './Alert.css';
+import './Alert.scss';
 
 class AlertComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleClose() {
         Alert.close(this.props.id);
     }

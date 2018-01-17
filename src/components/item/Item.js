@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {requestItemDetails} from '../../actions/items';
 import {getItemById, getSessionInfo} from '../../selectors';
-import './Item.css';
+import './Item.scss';
 
 
 class Item extends Component {
