@@ -20,7 +20,7 @@ export const updateItem = async (id, name, description, categoryId) => {
             id,
             name,
             description,
-            categoryId
+            category_id: categoryId
         }
     });
 };
@@ -32,7 +32,7 @@ export const addItem = async (name, description, categoryId) => {
         data: {
             name,
             description,
-            categoryId
+            category_id: categoryId
         }
     });
 };
