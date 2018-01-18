@@ -34,7 +34,14 @@ const items = (state = initialState, action) => {
             action.category.items.forEach(item => {
                 if (ids.indexOf(item.id) === -1) {
                     ids.push(item.id);
-                    byId[item.id] = item;
+                    byId[item.id] = {
+                        ...item,
+                        category: {
+                            slug: action.category.slug,
+                            name: action.category.name,
+                            id: action.category.id
+                        }
+                    };
                 }
             });
 
