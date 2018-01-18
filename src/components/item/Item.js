@@ -64,7 +64,7 @@ class Item extends Component {
             return null
         }
 
-        if (item.userId === sessionInfo.id) {
+        if (item.user_id === sessionInfo.id) {
             return (
                 <div>
                     <Link to={`/catalog/${item.category.slug}/${item.slug}/${item.id}/edit`}>Edit</Link> | <Link

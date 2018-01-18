@@ -39,6 +39,21 @@ class Item extends Component {
                 description: item.description,
                 categoryId: item.category.id
             })
+        } else {
+
+        }
+
+
+    }
+
+    componentDidUpdate() {
+        const {categories} = this.props;
+        const {categoryId} = this.state;
+
+        if (!categoryId) {
+            this.setState({
+                categoryId: categories[0].id
+            })
         }
     }
 
@@ -92,12 +107,6 @@ class Item extends Component {
 
         if (categories.length === 0) {
             return null;
-        }
-
-        if (!categoryId) {
-            this.setState({
-                categoryId: categories[0].id
-            })
         }
 
         return (
